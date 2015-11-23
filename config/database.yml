@@ -7,22 +7,27 @@
 default: &default
   adapter: postgresql
   host: localhost
-  encoding: unicode
-  username: thaott
-  password: 123456
-  pool: 5
+  database: 'sample_app'
   # timeout: 5000
 
 development:
   <<: *default
-  database: 'sample_app'
+  encoding: unicode
+  username: thaott
+  password: 123456
+  pool: 5
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  adapter: postgresql
+  database: 'sample_app_test'
+  encoding: unicode
+  username: thaott
+  password: 123456
+  pool: 5
+  host: localhost
 
 production:
   <<: *default
