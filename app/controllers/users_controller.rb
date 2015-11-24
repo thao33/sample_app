@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      # after create, user's status is logged in, then create session to store user_ids
+      log_in @user
       flash[:success] = "Welcom to the Sample App!"
       redirect_to @user
     else
