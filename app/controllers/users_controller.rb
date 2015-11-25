@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.send_activation_email
       # after create, user's status is logged in, then create session to store user_ids
       log_in @user
       flash[:success] = "Welcom to the Sample App!"

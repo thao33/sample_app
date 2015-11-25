@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :account_activations, only: [:edit]
+
   get 'signup' => 'users#new'
 
   get 'static_pages/home'
