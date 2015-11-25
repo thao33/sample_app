@@ -1,14 +1,17 @@
 class User < ActiveRecord::Base
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
   attr_accessor :remember_token
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  has_many :microposts, dependent: :destroy
+
   validates :name, presence: true, length: {maximum: 50}
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX},
                     uniqueness: {case_sensitive: false}
   validates :password, length: {minimum: 6}, allow_nil: true
-  # validates :password_confirmation, presence: true, allow_nil: true
 
   before_save ->{self.email = email.downcase}
+
   has_secure_password
 
   class << self
@@ -41,5 +44,10 @@ class User < ActiveRecord::Base
   # Forgets a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Define a proto-feed
+  def feed
+    microposts
   end
 end

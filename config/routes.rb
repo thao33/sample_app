@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resource :microposts, only: [:create, :destroy]
+
   get 'signup' => 'users#new'
 
   get 'static_pages/home'

@@ -38,6 +38,12 @@ gem 'will_paginate'
 
 gem 'bootstrap-will_paginate'
 
+gem 'carrierwave'
+
+gem 'mini_magick'
+
+gem 'fog'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
